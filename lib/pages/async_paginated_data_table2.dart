@@ -90,46 +90,49 @@ class AsyncPaginatedDataTable2DemoState
     super.dispose();
   }
 
-  List<DataColumn> get _columns {
+  List<DataColumn2> get _columns {
     return [
-      DataColumn(
-        label: const Text('Desert'),
-        onSort: (columnIndex, ascending) => sort(columnIndex, ascending),
+      DataColumn2(
+        label: const Text('序號'),
+        size: ColumnSize.S,
+        // onSort: (columnIndex, ascending) => sort(columnIndex, ascending),
       ),
-      DataColumn(
-        label: const Text('Calories'),
-        numeric: true,
-        onSort: (columnIndex, ascending) => sort(columnIndex, ascending),
+      DataColumn2(
+        label: const Text('文件編號'),
+        //  onSort: (columnIndex, ascending) => sort(columnIndex, ascending),
       ),
-      DataColumn(
-        label: const Text('Fat (gm)'),
+      DataColumn2(
+        label: const Text('影像主類型'),
         numeric: true,
-        onSort: (columnIndex, ascending) => sort(columnIndex, ascending),
+        //  onSort: (columnIndex, ascending) => sort(columnIndex, ascending),
       ),
-      DataColumn(
-        label: const Text('Carbs (gm)'),
+      DataColumn2(
+        label: const Text('影像子類型'),
         numeric: true,
-        onSort: (columnIndex, ascending) => sort(columnIndex, ascending),
+        size: ColumnSize.L,
+        //   onSort: (columnIndex, ascending) => sort(columnIndex, ascending),
       ),
-      DataColumn(
-        label: const Text('Protein (gm)'),
+      DataColumn2(
+        label: const Text('頁碼'),
         numeric: true,
-        onSort: (columnIndex, ascending) => sort(columnIndex, ascending),
+        size: ColumnSize.S,
+        //  onSort: (columnIndex, ascending) => sort(columnIndex, ascending),
       ),
-      DataColumn(
-        label: const Text('Sodium (mg)'),
+      DataColumn2(
+        label: const Text('掃描日期/時間'),
         numeric: true,
-        onSort: (columnIndex, ascending) => sort(columnIndex, ascending),
+        //  onSort: (columnIndex, ascending) => sort(columnIndex, ascending),
       ),
-      DataColumn(
-        label: const Text('Calcium (%)'),
+      DataColumn2(
+        label: const Text('備註'),
         numeric: true,
-        onSort: (columnIndex, ascending) => sort(columnIndex, ascending),
+        //  onSort: (columnIndex, ascending) => sort(columnIndex, ascending),
       ),
-      DataColumn(
-        label: const Text('Iron (%)'),
-        numeric: true,
-        onSort: (columnIndex, ascending) => sort(columnIndex, ascending),
+      DataColumn2(
+        label: const Text(''),
+        size: ColumnSize.L,
+        //numeric: true,
+        //   onSort: (columnIndex, ascending) => sort(columnIndex, ascending),
       ),
     ];
   }
@@ -145,37 +148,39 @@ class AsyncPaginatedDataTable2DemoState
 
     return Stack(alignment: Alignment.bottomCenter, children: [
       AsyncPaginatedDataTable2(
+          showCheckboxColumn: true,
+          dataRowHeight: 24, //kMinInteractiveDimension,
           horizontalMargin: 20,
           checkboxHorizontalMargin: 12,
           columnSpacing: 0,
           wrapInCard: false,
-          header: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                _TitledRangeSelector(
-                    range: const RangeValues(150, 600),
-                    onChanged: (v) {
-                      // If the curren row/current page happens to be larger than
-                      // the total rows/total number of pages what would happen is determined by
-                      // [pageSyncApproach] field
-                      _dessertsDataSource!.caloriesFilter = v;
-                    },
-                    key: _rangeSelectorKey,
-                    title: 'AsyncPaginatedDataTable2',
-                    caption: 'Calories'),
-                if (kDebugMode && getCurrentRouteOption(context) == custPager)
-                  Row(children: [
-                    OutlinedButton(
-                        onPressed: () => _controller.goToPageWithRow(25),
-                        child: const Text('Go to row 25')),
-                    OutlinedButton(
-                        onPressed: () => _controller.goToRow(5),
-                        child: const Text('Go to row 5'))
-                  ]),
-                if (getCurrentRouteOption(context) == custPager)
-                  PageNumber(controller: _controller)
-              ]),
+          // header: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     mainAxisSize: MainAxisSize.max,
+          //     children: [
+          //       _TitledRangeSelector(
+          //           range: const RangeValues(150, 600),
+          //           onChanged: (v) {
+          //             // If the curren row/current page happens to be larger than
+          //             // the total rows/total number of pages what would happen is determined by
+          //             // [pageSyncApproach] field
+          //             _dessertsDataSource!.caloriesFilter = v;
+          //           },
+          //           key: _rangeSelectorKey,
+          //           title: 'AsyncPaginatedDataTable2',
+          //           caption: 'Calories'),
+          //       if (kDebugMode && getCurrentRouteOption(context) == custPager)
+          //         Row(children: [
+          //           OutlinedButton(
+          //               onPressed: () => _controller.goToPageWithRow(25),
+          //               child: const Text('Go to row 25')),
+          //           OutlinedButton(
+          //               onPressed: () => _controller.goToRow(5),
+          //               child: const Text('Go to row 5'))
+          //         ]),
+          //       if (getCurrentRouteOption(context) == custPager)
+          //         PageNumber(controller: _controller)
+          //     ]),
           rowsPerPage: _rowsPerPage,
           autoRowsToHeight: getCurrentRouteOption(context) == autoRows,
           // Default - do nothing, autoRows - goToLast, other - goToFirst
@@ -187,7 +192,7 @@ class AsyncPaginatedDataTable2DemoState
           minWidth: 800,
           fit: FlexFit.tight,
           border: TableBorder(
-              top: const BorderSide(color: Colors.black),
+              top: const BorderSide(color: Colors.grey),
               bottom: BorderSide(color: Colors.grey[300]!),
               left: BorderSide(color: Colors.grey[300]!),
               right: BorderSide(color: Colors.grey[300]!),
@@ -302,95 +307,95 @@ class __LoadingState extends State<_Loading> {
   }
 }
 
-class _TitledRangeSelector extends StatefulWidget {
-  const _TitledRangeSelector(
-      {super.key,
-      required this.onChanged,
-      this.title = "",
-      this.caption = "",
-      this.range = const RangeValues(0, 100)});
+// class _TitledRangeSelector extends StatefulWidget {
+//   const _TitledRangeSelector(
+//       {super.key,
+//       required this.onChanged,
+//       this.title = "",
+//       this.caption = "",
+//       this.range = const RangeValues(0, 100)});
 
-  final String title;
-  final String caption;
-  final Duration titleToSelectorSwitch = const Duration(seconds: 2);
-  final RangeValues range;
-  final Function(RangeValues) onChanged;
+//   final String title;
+//   final String caption;
+//   final Duration titleToSelectorSwitch = const Duration(seconds: 2);
+//   final RangeValues range;
+//   final Function(RangeValues) onChanged;
 
-  @override
-  State<_TitledRangeSelector> createState() => _TitledRangeSelectorState();
-}
+//   @override
+//   State<_TitledRangeSelector> createState() => _TitledRangeSelectorState();
+// }
 
-class _TitledRangeSelectorState extends State<_TitledRangeSelector> {
-  bool _titleVisible = true;
-  RangeValues _values = const RangeValues(0, 100);
+// class _TitledRangeSelectorState extends State<_TitledRangeSelector> {
+//   bool _titleVisible = true;
+//   RangeValues _values = const RangeValues(0, 100);
 
-  @override
-  void initState() {
-    super.initState();
+//   @override
+//   void initState() {
+//     super.initState();
 
-    _values = widget.range;
+//     _values = widget.range;
 
-    Timer(
-        widget.titleToSelectorSwitch,
-        () => setState(() {
-              _titleVisible = false;
-            }));
-  }
+//     Timer(
+//         widget.titleToSelectorSwitch,
+//         () => setState(() {
+//               _titleVisible = false;
+//             }));
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Stack(alignment: Alignment.centerLeft, children: [
-      AnimatedOpacity(
-          opacity: _titleVisible ? 1 : 0,
-          duration: const Duration(milliseconds: 1000),
-          child: Align(
-              alignment: Alignment.centerLeft, child: Text(widget.title))),
-      AnimatedOpacity(
-          opacity: _titleVisible ? 0 : 1,
-          duration: const Duration(milliseconds: 1000),
-          child: SizedBox(
-              width: 340,
-              child: Theme(
-                  data: blackSlider(context),
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        DefaultTextStyle(
-                            style: const TextStyle(
-                                fontSize: 15, color: Colors.black),
-                            child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 20),
-                                child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        _values.start.toStringAsFixed(0),
-                                      ),
-                                      Text(
-                                        widget.caption,
-                                      ),
-                                      Text(
-                                        _values.end.toStringAsFixed(0),
-                                      )
-                                    ]))),
-                        SizedBox(
-                            height: 24,
-                            child: RangeSlider(
-                              values: _values,
-                              divisions: 9,
-                              min: widget.range.start,
-                              max: widget.range.end,
-                              onChanged: (v) {
-                                setState(() {
-                                  _values = v;
-                                });
-                                widget.onChanged(v);
-                              },
-                            ))
-                      ]))))
-    ]);
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Stack(alignment: Alignment.centerLeft, children: [
+//       AnimatedOpacity(
+//           opacity: _titleVisible ? 1 : 0,
+//           duration: const Duration(milliseconds: 1000),
+//           child: Align(
+//               alignment: Alignment.centerLeft, child: Text(widget.title))),
+//       AnimatedOpacity(
+//           opacity: _titleVisible ? 0 : 1,
+//           duration: const Duration(milliseconds: 1000),
+//           child: SizedBox(
+//               width: 340,
+//               child: Theme(
+//                   data: blackSlider(context),
+//                   child: Column(
+//                       mainAxisAlignment: MainAxisAlignment.center,
+//                       mainAxisSize: MainAxisSize.max,
+//                       children: [
+//                         DefaultTextStyle(
+//                             style: const TextStyle(
+//                                 fontSize: 15, color: Colors.black),
+//                             child: Padding(
+//                                 padding:
+//                                     const EdgeInsets.symmetric(horizontal: 20),
+//                                 child: Row(
+//                                     mainAxisAlignment:
+//                                         MainAxisAlignment.spaceBetween,
+//                                     children: [
+//                                       Text(
+//                                         _values.start.toStringAsFixed(0),
+//                                       ),
+//                                       Text(
+//                                         widget.caption,
+//                                       ),
+//                                       Text(
+//                                         _values.end.toStringAsFixed(0),
+//                                       )
+//                                     ]))),
+//                         SizedBox(
+//                             height: 24,
+//                             child: RangeSlider(
+//                               values: _values,
+//                               divisions: 9,
+//                               min: widget.range.start,
+//                               max: widget.range.end,
+//                               onChanged: (v) {
+//                                 setState(() {
+//                                   _values = v;
+//                                 });
+//                                 widget.onChanged(v);
+//                               },
+//                             ))
+//                       ]))))
+//     ]);
+//   }
+// }

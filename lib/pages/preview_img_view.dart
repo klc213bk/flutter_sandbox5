@@ -25,7 +25,7 @@ class PreviewImgView extends StatelessWidget {
         color: Theme.of(context).canvasColor,
         border: Border(
             right: BorderSide(
-                width: 5,
+                width: 2,
                 color:
                     (Theme.of(context).appBarTheme.backgroundColor) as Color)),
       ),

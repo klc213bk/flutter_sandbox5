@@ -9,10 +9,24 @@ class ThemeClass {
       canvasColor: Color.fromARGB(255, 212, 215, 218),
       scaffoldBackgroundColor: Colors.white,
       colorScheme: ColorScheme.light(),
+      backgroundColor: Color.fromARGB(255, 29, 3, 108),
+      primaryTextTheme: TextTheme(
+        bodyText1: TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.normal,
+          color: Colors.black,
+        ),
+      ),
+      buttonTheme:
+          ButtonThemeData(buttonColor: Color.fromARGB(255, 29, 3, 108)),
       textTheme: TextTheme(
-          titleMedium: TextStyle(color: Color.fromARGB(26, 21, 34, 219))),
+          titleMedium: TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.bold,
+        color: Colors.black,
+      )),
       appBarTheme: AppBarTheme(
-        backgroundColor: Color.fromARGB(255, 60, 207, 11),
+        backgroundColor: Color.fromARGB(255, 29, 3, 108),
       ));
 
   static ThemeData darkTheme = ThemeData(

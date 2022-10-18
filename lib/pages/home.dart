@@ -15,13 +15,23 @@ class HomePage extends StatelessWidget {
   /// {@macro preview_img_view}
   HomePage({super.key});
 
-  MultiSplitView multiSplitView = MultiSplitView(
-    controller: MultiSplitViewController(areas: [Area(weight: 0.5)]),
-    children: [
-      PreviewImgView(),
-      ScannedPageView(),
-    ],
-  );
+  MultiSplitView multiSplitView(BuildContext context) {
+    return MultiSplitView(
+      controller: MultiSplitViewController(
+        areas: [
+          Area(weight: 0.35, minimalWeight: 0.25),
+          Area(minimalSize: 550),
+        ],
+      ),
+      children: [
+        PreviewImgView(),
+        Container(
+          color: Theme.of(context).canvasColor,
+          child: ScannedPageView(),
+        ),
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +39,12 @@ class HomePage extends StatelessWidget {
       appBar: appbar(context),
       // backgroundColor: Theme.of(context).backgroundColor,
       body: MultiSplitViewTheme(
-        child: multiSplitView,
+        child: multiSplitView(context),
         data: MultiSplitViewThemeData(
           dividerPainter: DividerPainters.grooved1(
-              color: Colors.indigo[100]!,
-              highlightedColor: Colors.indigo[900]!),
+              backgroundColor: Theme.of(context).canvasColor!,
+              color: Colors.grey!,
+              highlightedColor: Theme.of(context).backgroundColor!),
         ),
       ),
     );

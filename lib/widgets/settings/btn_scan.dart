@@ -30,8 +30,10 @@ class _ButtonState_Scan extends State<Button_Scan> {
           ),
         ),
         onPressed: () {},
-        child: Text('開始掃描',
-            softWrap: false, style: Theme.of(context).textTheme.titleMedium),
+        child: Text(
+          '開始掃描',
+          softWrap: false,
+        ),
       ),
     );
   }

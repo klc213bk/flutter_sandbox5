@@ -23,7 +23,10 @@ class _ButtonState_ScanSource extends State<Button_ScanSource> {
         ),
       ),
       onPressed: () {},
-      child: Text('掃描配置', style: Theme.of(context).textTheme.titleMedium),
+      child: Text(
+        '掃描配置',
+        softWrap: false,
+      ),
     );
   }
 }
