@@ -21,11 +21,14 @@ class _ButtonState_Scan extends State<Button_Scan> {
       alignment: Alignment.centerRight,
       padding: EdgeInsets.only(right: 10),
       child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          shape: new RoundedRectangleBorder(
-            borderRadius: new BorderRadius.circular(30.0),
-          ),
-        ),
+        style: ButtonStyle(
+            textStyle: MaterialStateProperty.all<TextStyle>(
+              TextStyle(fontWeight: FontWeight.normal),
+            ),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30.0),
+            ))),
         onPressed: () {},
         child: Text(
           '開始掃描',

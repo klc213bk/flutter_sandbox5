@@ -166,7 +166,7 @@ class FilingView extends StatelessWidget {
           ),
         ),
         Expanded(
-          flex: 5,
+          flex: 1,
           child: Container(
             width: mediaQueryWidth * (ratio4 + ratio5 + ratio6 + ratio7),
             child: fileType,
@@ -406,12 +406,9 @@ class FilingView extends StatelessWidget {
             textAlign: TextAlign.right,
           ),
         ),
-        Expanded(
-          flex: 1,
-          child: Container(
-            width: mediaQueryWidth * ratio4,
-            child: insert,
-          ),
+        Container(
+          width: mediaQueryWidth * ratio4,
+          child: insert,
         ),
         Container(
           margin: leftMargin,
@@ -441,7 +438,7 @@ class FilingView extends StatelessWidget {
         Expanded(
           flex: 1,
           child: Container(
-            width: mediaQueryWidth * ratio6,
+            width: mediaQueryWidth * ratio8,
             child: video,
           ),
         ),

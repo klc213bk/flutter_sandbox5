@@ -7,10 +7,13 @@ Widget deleteBtn(BuildContext context) {
     margin: EdgeInsets.fromLTRB(3, 10, 3, 0),
     child: ElevatedButton(
       style: ButtonStyle(
+          textStyle: MaterialStateProperty.all<TextStyle>(
+            TextStyle(fontWeight: FontWeight.normal),
+          ),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30.0),
-      ))),
+            borderRadius: BorderRadius.circular(30.0),
+          ))),
       onPressed: () {},
       child: Text(
         '刪除',

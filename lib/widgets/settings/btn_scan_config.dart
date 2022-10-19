@@ -11,11 +11,14 @@ class _ButtonState_ScanSource extends State<Button_ScanSource> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        shape: new RoundedRectangleBorder(
-          borderRadius: new BorderRadius.circular(30.0),
-        ),
-      ),
+      style: ButtonStyle(
+          textStyle: MaterialStateProperty.all<TextStyle>(
+            TextStyle(fontWeight: FontWeight.normal),
+          ),
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0),
+          ))),
       onPressed: () {},
       child: Text(
         '掃描配置',
