@@ -16,6 +16,7 @@ class _PaperSideState extends State<DropdownButton_PaperSide> {
       body: DropdownButton<String>(
         value: dropdownValue,
         isDense: true,
+        isExpanded: true,
         hint: Text('Select a color'),
         icon: const Icon(Icons.arrow_drop_down),
         onChanged: (String? newValue) {

@@ -26,7 +26,6 @@ Widget divider(BuildContext context, String textString) {
         Text(
           textString,
           softWrap: false,
-          style: Theme.of(context).textTheme.titleMedium,
         ),
         // ),
         Expanded(

@@ -18,6 +18,7 @@ class _DropdownButtonState_ColorMode extends State<DropdownButton_ColorMode> {
     return DropdownButton<String>(
       value: dropdownValue,
       isDense: true,
+      isExpanded: true,
       icon: const Icon(Icons.arrow_downward),
       elevation: 16,
       style: const TextStyle(color: Colors.deepPurple),
