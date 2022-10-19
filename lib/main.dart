@@ -16,9 +16,9 @@ main() {
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     setWindowTitle('新版影像掃描');
     // setWindowMaxSize(const Size(max_width, max_height));
-    setWindowMinSize(const Size(1300, 800));
+    setWindowMinSize(const Size(1400, 900));
     // Future<Null>.delayed(Duration(seconds: 1), () {
-    setWindowFrame(Rect.fromLTWH(100, 100, 1300, 800));
+    setWindowFrame(Rect.fromLTWH(100, 100, 1400, 900));
     //  });
   }
 
