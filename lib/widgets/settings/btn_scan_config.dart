@@ -10,14 +10,8 @@ class Button_ScanSource extends StatefulWidget {
 class _ButtonState_ScanSource extends State<Button_ScanSource> {
   @override
   Widget build(BuildContext context) {
-    final ButtonStyle style = ElevatedButton.styleFrom(
-        backgroundColor: Theme.of(context).backgroundColor,
-        textStyle: Theme.of(context).textTheme.titleMedium);
-
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: Theme.of(context).buttonTheme.colorScheme?.background,
-        textStyle: Theme.of(context).textTheme.titleMedium,
         shape: new RoundedRectangleBorder(
           borderRadius: new BorderRadius.circular(30.0),
         ),

@@ -22,9 +22,6 @@ class _ButtonState_Scan extends State<Button_Scan> {
       padding: EdgeInsets.only(right: 10),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor:
-              Theme.of(context).buttonTheme.colorScheme?.background,
-          textStyle: Theme.of(context).textTheme.titleMedium,
           shape: new RoundedRectangleBorder(
             borderRadius: new BorderRadius.circular(30.0),
           ),
