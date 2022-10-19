@@ -11,57 +11,80 @@ import '../widgets/settings/dd_paper_side.dart';
 class SettingsView extends StatelessWidget {
   SettingsView({
     Key? key,
-  }) : super(key: key);
+  }) : super(key: key) {
+    leftMargin = const EdgeInsets.only(left: 5.0);
+    rightMargin = const EdgeInsets.only(right: 5.0);
+    ratio1 = 0.07;
+    ratio2 = 0.07;
+    ratio3 = 0.07;
+    ratio4 = 0.07;
+    ratio5 = 0.15;
+    ratio6 = 0.1;
+    // remain
+  }
+
+  late final EdgeInsets leftMargin;
+  late final EdgeInsets rightMargin;
+  late final double ratio1;
+  late final double ratio2;
+  late final double ratio3;
+  late final double ratio4;
+  late final double ratio5;
+  late final double ratio6;
 
   @override
   Widget build(BuildContext context) {
+    final double mediaQueryWidth = 0.61 * MediaQuery.of(context).size.width;
     return Column(
       children: [
         divider(context, '影像操作'),
-        line1(context),
+        settings_line1(context, mediaQueryWidth),
       ],
     );
   }
-}
 
-Widget line1(BuildContext context) {
-  return SizedBox(
-    child: Flex(
-      direction: Axis.horizontal,
+  Widget settings_line1(BuildContext context, double mediaQueryWidth) {
+    return Row(
       children: [
         Container(
-          margin: const EdgeInsets.only(left: 5.0, right: 5.0),
-          child: Text(
-            '紙張來源',
+          margin: leftMargin,
+          width: mediaQueryWidth * ratio1,
+          child: new Text(
+            "紙張來源",
+            softWrap: false,
+            textAlign: TextAlign.left,
           ),
         ),
         Container(
-          margin: const EdgeInsets.only(left: 5.0, right: 5.0),
+          width: mediaQueryWidth * ratio2,
           child: paperSided,
         ),
         Container(
-          margin: const EdgeInsets.only(left: 5.0, right: 5.0),
-          child: Text(
-            '影像模式',
+          margin: leftMargin,
+          width: mediaQueryWidth * ratio3,
+          child: new Text(
+            "影像模式",
+            softWrap: false,
+            textAlign: TextAlign.right,
           ),
         ),
         Container(
-          margin: const EdgeInsets.only(left: 5.0, right: 5.0),
-          child: colorMode,
+          width: mediaQueryWidth * ratio4,
+          child: paperSided,
         ),
         Container(
+          width: mediaQueryWidth * ratio5,
           alignment: Alignment.centerRight,
           padding: EdgeInsets.only(right: 10),
           child: Button_ScanSource(),
         ),
-        Expanded(
-          flex: 1,
-          child: Container(
-            margin: const EdgeInsets.only(left: 5.0, right: 5.0),
-            child: Text(
-              '*未設定',
-              softWrap: false,
-            ),
+        Container(
+          margin: leftMargin,
+          width: mediaQueryWidth * ratio6,
+          child: new Text(
+            "*未設定",
+            softWrap: false,
+            textAlign: TextAlign.left,
           ),
         ),
         Expanded(
@@ -69,44 +92,6 @@ Widget line1(BuildContext context) {
           child: Button_Scan(),
         ),
       ],
-    ),
-  );
+    );
+  }
 }
-
-Widget paperSided = DropdownButton<String>(
-  // value: dropdownValue,
-  hint: Text(''),
-  isDense: true,
-  icon: const Icon(Icons.arrow_drop_down),
-  onChanged: (String? newValue) {
-    // setState(() {
-    //   dropdownValue = newValue!;
-    // });
-  },
-  items: <String>['單面', '雙面'].map<DropdownMenuItem<String>>((String value) {
-    return DropdownMenuItem<String>(
-      value: value,
-      child: Text(value),
-    );
-  }).toList(),
-);
-
-Widget colorMode = DropdownButton<String>(
-  // value: dropdownValue,
-  hint: Text(''),
-  isDense: true,
-  icon: const Icon(Icons.arrow_drop_down),
-  elevation: 16,
-  onChanged: (String? value) {
-    // This is called when the user selects an item.
-    // setState(() {
-    //   dropdownValue = value!;
-    // });
-  },
-  items: <String>['黑白', '彩色'].map<DropdownMenuItem<String>>((String value) {
-    return DropdownMenuItem<String>(
-      value: value,
-      child: Text(value),
-    );
-  }).toList(),
-);

@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
       controller: MultiSplitViewController(
         areas: [
           Area(weight: 0.35, minimalWeight: 0.25),
-          Area(minimalSize: 550),
+          Area(minimalSize: 700),
         ],
       ),
       children: [

@@ -17,8 +17,10 @@ class ThemeClass {
           color: Colors.black,
         ),
       ),
-      buttonTheme:
-          ButtonThemeData(buttonColor: Color.fromARGB(255, 29, 3, 108)),
+      buttonTheme: ButtonThemeData(
+          minWidth: 90,
+          height: 27,
+          buttonColor: Color.fromARGB(255, 29, 3, 108)),
       textTheme: TextTheme(
           titleMedium: TextStyle(
         fontSize: 12,

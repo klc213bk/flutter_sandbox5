@@ -39,8 +39,6 @@ class ScannedPageView extends StatelessWidget {
           ),
         ),
         Container(
-          constraints: BoxConstraints(minWidth: 800),
-          //constraints: BoxConstraints(minHeight: 180),
           padding: EdgeInsets.all(10),
           margin: const EdgeInsets.fromLTRB(0, 5, 5, 5),
           decoration: BoxDecoration(
@@ -50,20 +48,13 @@ class ScannedPageView extends StatelessWidget {
           child: FilingView(),
         ),
         Container(
-          //onstraints: BoxConstraints(minWidth: 800),
-          //constraints: BoxConstraints(minHeight: 180),
           padding: EdgeInsets.all(10),
           margin: const EdgeInsets.fromLTRB(0, 5, 5, 5),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
             color: Colors.white,
           ),
-          // child: Column(
-          //   children: [
-          //     // divider(context, '影像操作'),
-          //     // line1(context),
-          //   ],
-          // ),
+          child: SettingsView(),
         ),
       ],
     );
