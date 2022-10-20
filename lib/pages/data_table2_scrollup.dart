@@ -58,7 +58,7 @@ class DataTable2ScrollupDemoState extends State<DataTable2ScrollupDemo> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(10),
         child: Stack(children: [
           Theme(
               // These makes scroll bars almost always visible. If horizontal scroll bar
@@ -67,12 +67,29 @@ class DataTable2ScrollupDemoState extends State<DataTable2ScrollupDemo> {
                   scrollbarTheme: ScrollbarThemeData(
                       thumbVisibility: MaterialStateProperty.all(true),
                       thumbColor:
-                          MaterialStateProperty.all<Color>(Colors.black))),
+                          MaterialStateProperty.all<Color>(Colors.black38))),
               child: DataTable2(
+                  border: TableBorder(
+                      top: const BorderSide(color: Colors.black12),
+                      bottom: BorderSide(color: Colors.grey[100]!),
+                      left: BorderSide(color: Colors.grey[100]!),
+                      right: BorderSide(color: Colors.grey[100]!),
+                      verticalInside: BorderSide(color: Colors.grey[100]!),
+                      horizontalInside:
+                          BorderSide(color: Colors.grey[100]!, width: 1)),
+                  showBottomBorder: true,
+                  headingRowHeight: 24,
+                  headingRowColor: MaterialStateProperty.all<Color>(
+                    Color.fromARGB(255, 191, 193, 185),
+                  ),
+                  // dataRowColor: MaterialStateProperty.all<Color>(
+                  //   Colors.green,
+                  // ),
+                  dataRowHeight: 24,
                   scrollController: _controller,
                   columnSpacing: 0,
                   horizontalMargin: 12,
-                  bottomMargin: 10,
+                  bottomMargin: 0,
                   minWidth: 600,
                   sortColumnIndex: _sortColumnIndex,
                   sortAscending: _sortAscending,
@@ -82,57 +99,57 @@ class DataTable2ScrollupDemoState extends State<DataTable2ScrollupDemo> {
                     DataColumn2(
                       label: const Text('Desert'),
                       size: ColumnSize.S,
-                      // onSort: (columnIndex, ascending) =>
-                      //     _sort<String>((d) => d.name, columnIndex, ascending),
+                      onSort: (columnIndex, ascending) =>
+                          _sort<String>((d) => d.name, columnIndex, ascending),
                     ),
                     DataColumn2(
                       label: const Text('Calories'),
                       size: ColumnSize.S,
                       numeric: true,
-                      // onSort: (columnIndex, ascending) =>
-                      //     _sort<num>((d) => d.calories, columnIndex, ascending),
+                      onSort: (columnIndex, ascending) =>
+                          _sort<num>((d) => d.calories, columnIndex, ascending),
                     ),
                     DataColumn2(
                       label: const Text('Fat (gm)'),
                       size: ColumnSize.S,
                       numeric: true,
-                      // onSort: (columnIndex, ascending) =>
-                      //     _sort<num>((d) => d.fat, columnIndex, ascending),
+                      onSort: (columnIndex, ascending) =>
+                          _sort<num>((d) => d.fat, columnIndex, ascending),
                     ),
                     DataColumn2(
                       label: const Text('Carbs (gm)'),
                       size: ColumnSize.S,
                       numeric: true,
-                      // onSort: (columnIndex, ascending) =>
-                      //     _sort<num>((d) => d.carbs, columnIndex, ascending),
+                      onSort: (columnIndex, ascending) =>
+                          _sort<num>((d) => d.carbs, columnIndex, ascending),
                     ),
                     DataColumn2(
                       label: const Text('Protein (gm)'),
                       size: ColumnSize.S,
                       numeric: true,
-                      // onSort: (columnIndex, ascending) =>
-                      //     _sort<num>((d) => d.protein, columnIndex, ascending),
+                      onSort: (columnIndex, ascending) =>
+                          _sort<num>((d) => d.protein, columnIndex, ascending),
                     ),
                     DataColumn2(
                       label: const Text('Sodium (mg)'),
                       size: ColumnSize.S,
                       numeric: true,
-                      // onSort: (columnIndex, ascending) =>
-                      //     _sort<num>((d) => d.sodium, columnIndex, ascending),
+                      onSort: (columnIndex, ascending) =>
+                          _sort<num>((d) => d.sodium, columnIndex, ascending),
                     ),
                     DataColumn2(
                       label: const Text('Calcium (%)'),
                       size: ColumnSize.S,
                       numeric: true,
-                      // onSort: (columnIndex, ascending) =>
-                      //     _sort<num>((d) => d.calcium, columnIndex, ascending),
+                      onSort: (columnIndex, ascending) =>
+                          _sort<num>((d) => d.calcium, columnIndex, ascending),
                     ),
                     DataColumn2(
                       label: const Text('Iron (%)'),
                       size: ColumnSize.S,
                       numeric: true,
-                      // onSort: (columnIndex, ascending) =>
-                      //     _sort<num>((d) => d.iron, columnIndex, ascending),
+                      onSort: (columnIndex, ascending) =>
+                          _sort<num>((d) => d.iron, columnIndex, ascending),
                     ),
                   ],
                   rows: List<DataRow>.generate(_dessertsDataSource.rowCount,

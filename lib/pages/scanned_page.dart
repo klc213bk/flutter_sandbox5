@@ -20,27 +20,26 @@ class ScannedPageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final random = Random();
     return Flex(
       direction: Axis.vertical,
       children: <Widget>[
         Expanded(
           flex: 1,
           child: Container(
-            constraints: BoxConstraints(minHeight: 300),
-            padding: EdgeInsets.all(10),
-            margin: const EdgeInsets.fromLTRB(0, 5, 5, 5),
+            constraints: BoxConstraints(minHeight: 350),
+            padding: EdgeInsets.all(1),
+            margin: const EdgeInsets.fromLTRB(0, 5, 5, 0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
               color: Colors.white,
             ),
-            child: AsyncPaginatedDataTable2Demo(),
+            child: DataTable2ScrollupDemo(),
             //      ),
           ),
         ),
         Container(
           padding: EdgeInsets.all(10),
-          margin: const EdgeInsets.fromLTRB(0, 5, 5, 5),
+          margin: const EdgeInsets.fromLTRB(0, 5, 5, 0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
             color: Colors.white,

@@ -94,7 +94,7 @@ class DessertDataSource extends DataTableSource {
       [sortedByCalories = false,
       this.hasRowTaps = false,
       this.hasRowHeightOverrides = false,
-      this.hasZebraStripes = false]) {
+      this.hasZebraStripes = true]) {
     desserts = _desserts;
     if (sortedByCalories) {
       sort((d) => d.calories, true);
@@ -144,15 +144,25 @@ class DessertDataSource extends DataTableSource {
     assert(index >= 0);
     if (index >= desserts.length) throw 'index > _desserts.length';
     final dessert = desserts[index];
+    print(
+        '${dessert.id} index:$index, hasZebraStripes:${hasZebraStripes} ${Theme.of(context).highlightColor}');
     return DataRow2.byIndex(
       index: index,
       selected: dessert.selected,
       color: color != null
           ? MaterialStateProperty.all(color)
-          : (hasZebraStripes && index.isEven
-              ? MaterialStateProperty.all(Theme.of(context).highlightColor)
-              : null),
+          : (dessert.selected) // modify
+              ? MaterialStateProperty.all<Color>(
+                  Color.fromARGB(255, 154, 152, 243),
+                )
+              : (hasZebraStripes && index.isEven
+                  ? null
+                  : MaterialStateProperty.all<Color>(
+                      Color.fromARGB(255, 248, 248, 239),
+                    )),
       onSelectChanged: (value) {
+        // modify
+        selectAll(false);
         if (dessert.selected != value) {
           _selectedCount += value! ? 1 : -1;
           assert(_selectedCount >= 0);

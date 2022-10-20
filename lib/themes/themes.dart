@@ -6,6 +6,21 @@ import 'package:flutter/material.dart';
 
 class ThemeClass {
   static ThemeData lightTheme = ThemeData(
+      // dataTableTheme: DataTableThemeData(
+      //   headingTextStyle: TextStyle(
+      //     color: Colors.black54,
+      //     fontWeight: FontWeight.bold,
+      //   ),
+      //   dataRowColor: MaterialStateProperty.all<Color>(
+      //     Color.fromARGB(255, 97, 4, 38),
+      //   ),
+      //   dataRowHeight: 24,
+      //   headingRowHeight: 24,
+      //   headingRowColor: MaterialStateProperty.all<Color>(
+      //     Color.fromARGB(255, 107, 67, 199),
+      //   ),
+      // ),
+      highlightColor: Color.fromARGB(26, 59, 2, 2),
       canvasColor: Color.fromARGB(255, 212, 215, 218),
       scaffoldBackgroundColor: Colors.white,
       colorScheme: ColorScheme.light(),

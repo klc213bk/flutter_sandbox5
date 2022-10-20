@@ -67,15 +67,15 @@ class FilingView extends StatelessWidget {
     final double mediaQueryWidth = 0.61 * MediaQuery.of(context).size.width;
 
     // ignore: avoid_print
-    print('size:${mediaQueryWidth}');
-    print('ratio1:${mediaQueryWidth * ratio1}');
-    print('ratio2:${mediaQueryWidth * ratio2}');
-    print('ratio3:${mediaQueryWidth * ratio3}');
-    print('ratio4:${mediaQueryWidth * ratio4}');
-    print('ratio5:${mediaQueryWidth * ratio5}');
-    print('ratio6:${mediaQueryWidth * ratio6}');
-    print('ratio7:${mediaQueryWidth * ratio7}');
-    print('ratio8:${mediaQueryWidth * ratio8}');
+    // print('size:${mediaQueryWidth}');
+    // print('ratio1:${mediaQueryWidth * ratio1}');
+    // print('ratio2:${mediaQueryWidth * ratio2}');
+    // print('ratio3:${mediaQueryWidth * ratio3}');
+    // print('ratio4:${mediaQueryWidth * ratio4}');
+    // print('ratio5:${mediaQueryWidth * ratio5}');
+    // print('ratio6:${mediaQueryWidth * ratio6}');
+    // print('ratio7:${mediaQueryWidth * ratio7}');
+    // print('ratio8:${mediaQueryWidth * ratio8}');
 
     return Column(
       children: [
