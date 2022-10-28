@@ -66,6 +66,8 @@ class Dessert {
     this.sodium,
     this.calcium,
     this.iron,
+    this.fileName,
+    this.imageSaveDir,
   );
 
   final int id = _idCounter++;
@@ -78,6 +80,10 @@ class Dessert {
   final int sodium;
   final int calcium;
   final int iron;
+
+  final String fileName;
+  final String imageSaveDir;
+
   bool selected = false;
 }
 
@@ -96,9 +102,9 @@ class DessertDataSource extends DataTableSource {
       this.hasRowHeightOverrides = false,
       this.hasZebraStripes = true]) {
     desserts = _desserts;
-    if (sortedByCalories) {
-      sort((d) => d.calories, true);
-    }
+    // if (sortedByCalories) {
+    //   sort((d) => d.calories, true);
+    // }
   }
 
   final BuildContext context;
@@ -110,18 +116,19 @@ class DessertDataSource extends DataTableSource {
   // Color each Row by index's parity
   bool hasZebraStripes = false;
 
-  void sort<T>(Comparable<T> Function(Dessert d) getField, bool ascending) {
-    desserts.sort((a, b) {
-      final aValue = getField(a);
-      final bValue = getField(b);
-      return ascending
-          ? Comparable.compare(aValue, bValue)
-          : Comparable.compare(bValue, aValue);
-    });
-    notifyListeners();
-  }
+  // void sort<T>(Comparable<T> Function(Dessert d) getField, bool ascending) {
+  //   desserts.sort((a, b) {
+  //     final aValue = getField(a);
+  //     final bValue = getField(b);
+  //     return ascending
+  //         ? Comparable.compare(aValue, bValue)
+  //         : Comparable.compare(bValue, aValue);
+  //   });
+  //   notifyListeners();
+  // }
 
   void updateSelectedDesserts(RestorableDessertSelections selectedRows) {
+    print('jjjj');
     _selectedCount = 0;
     for (var i = 0; i < desserts.length; i += 1) {
       var dessert = desserts[i];
@@ -144,8 +151,8 @@ class DessertDataSource extends DataTableSource {
     assert(index >= 0);
     if (index >= desserts.length) throw 'index > _desserts.length';
     final dessert = desserts[index];
-    print(
-        '${dessert.id} index:$index, hasZebraStripes:${hasZebraStripes} ${Theme.of(context).highlightColor}');
+    // print(
+    //     '${dessert.id} index:$index, hasZebraStripes:${hasZebraStripes} ${Theme.of(context).highlightColor}');
     return DataRow2.byIndex(
       index: index,
       selected: dessert.selected,
@@ -161,8 +168,10 @@ class DessertDataSource extends DataTableSource {
                       Color.fromARGB(255, 248, 248, 239),
                     )),
       onSelectChanged: (value) {
+        print('aa: ${dessert.selected}, $value');
         // modify
         selectAll(false);
+
         if (dessert.selected != value) {
           _selectedCount += value! ? 1 : -1;
           assert(_selectedCount >= 0);
@@ -224,164 +233,164 @@ class DessertDataSource extends DataTableSource {
 /// Async datasource for AsynPaginatedDataTabke2 example. Based on AsyncDataTableSource which
 /// is an extension to FLutter's DataTableSource and aimed at solving
 /// saync data fetching scenarious by paginated table (such as using Web API)
-class DessertDataSourceAsync extends AsyncDataTableSource {
-  DessertDataSourceAsync() {
-    print('DessertDataSourceAsync created');
-  }
+// class DessertDataSourceAsync extends AsyncDataTableSource {
+//   DessertDataSourceAsync() {
+//     print('DessertDataSourceAsync created');
+//   }
 
-  DessertDataSourceAsync.empty() {
-    _empty = true;
-    print('DessertDataSourceAsync.empty created');
-  }
+//   DessertDataSourceAsync.empty() {
+//     _empty = true;
+//     print('DessertDataSourceAsync.empty created');
+//   }
 
-  DessertDataSourceAsync.error() {
-    _errorCounter = 0;
-    print('DessertDataSourceAsync.error created');
-  }
+//   DessertDataSourceAsync.error() {
+//     _errorCounter = 0;
+//     print('DessertDataSourceAsync.error created');
+//   }
 
-  bool _empty = false;
-  int? _errorCounter;
+//   bool _empty = false;
+//   int? _errorCounter;
 
-  RangeValues? _caloriesFilter;
+//   RangeValues? _caloriesFilter;
 
-  RangeValues? get caloriesFilter => _caloriesFilter;
-  set caloriesFilter(RangeValues? calories) {
-    _caloriesFilter = calories;
-    refreshDatasource();
-  }
+//   RangeValues? get caloriesFilter => _caloriesFilter;
+//   set caloriesFilter(RangeValues? calories) {
+//     _caloriesFilter = calories;
+//     refreshDatasource();
+//   }
 
-  final DesertsFakeWebService _repo = DesertsFakeWebService();
+//   final DesertsFakeWebService _repo = DesertsFakeWebService();
 
-  String _sortColumn = "name";
-  bool _sortAscending = true;
+//   String _sortColumn = "name";
+//   bool _sortAscending = true;
 
-  void sort(String columnName, bool ascending) {
-    _sortColumn = columnName;
-    _sortAscending = ascending;
-    refreshDatasource();
-  }
+//   void sort(String columnName, bool ascending) {
+//     _sortColumn = columnName;
+//     _sortAscending = ascending;
+//     refreshDatasource();
+//   }
 
-  Future<int> getTotalRecords() {
-    return Future<int>.delayed(
-        const Duration(milliseconds: 0), () => _empty ? 0 : _dessertsX3.length);
-  }
+//   Future<int> getTotalRecords() {
+//     return Future<int>.delayed(
+//         const Duration(milliseconds: 0), () => _empty ? 0 : _dessertsX3.length);
+//   }
 
-  @override
-  Future<AsyncRowsResponse> getRows(int start, int end) async {
-    print('getRows($start, $end)');
-    if (_errorCounter != null) {
-      _errorCounter = _errorCounter! + 1;
+//   @override
+//   Future<AsyncRowsResponse> getRows(int start, int end) async {
+//     print('getRows($start, $end)');
+//     if (_errorCounter != null) {
+//       _errorCounter = _errorCounter! + 1;
 
-      if (_errorCounter! % 2 == 1) {
-        await Future.delayed(const Duration(milliseconds: 1000));
-        throw 'Error #${((_errorCounter! - 1) / 2).round() + 1} has occured';
-      }
-    }
+//       if (_errorCounter! % 2 == 1) {
+//         await Future.delayed(const Duration(milliseconds: 1000));
+//         throw 'Error #${((_errorCounter! - 1) / 2).round() + 1} has occured';
+//       }
+//     }
 
-    var index = start;
-    final format = NumberFormat.decimalPercentPattern(
-      locale: 'en',
-      decimalDigits: 0,
-    );
-    assert(index >= 0);
+//     var index = start;
+//     final format = NumberFormat.decimalPercentPattern(
+//       locale: 'en',
+//       decimalDigits: 0,
+//     );
+//     assert(index >= 0);
 
-    // List returned will be empty is there're fewer items than startingAt
-    var x = _empty
-        ? await Future.delayed(const Duration(milliseconds: 2000),
-            () => DesertsFakeWebServiceResponse(0, []))
-        : await _repo.getData(
-            start, end, _caloriesFilter, _sortColumn, _sortAscending);
+//     // List returned will be empty is there're fewer items than startingAt
+//     var x = _empty
+//         ? await Future.delayed(const Duration(milliseconds: 2000),
+//             () => DesertsFakeWebServiceResponse(0, []))
+//         : await _repo.getData(
+//             start, end, _caloriesFilter, _sortColumn, _sortAscending);
 
-    var r = AsyncRowsResponse(
-        x.totalRecords,
-        x.data.map((dessert) {
-          return DataRow(
-            key: ValueKey<int>(dessert.id),
-            selected: dessert.selected,
-            onSelectChanged: (value) {
-              if (value != null) {
-                setRowSelection(ValueKey<int>(dessert.id), value);
-              }
-            },
-            cells: [
-              DataCell(Text(dessert.name)),
-              DataCell(Text('${dessert.calories}')),
-              DataCell(Text(dessert.fat.toStringAsFixed(1))),
-              DataCell(Text('${dessert.carbs}')),
-              DataCell(Text(dessert.protein.toStringAsFixed(1))),
-              DataCell(Text('${dessert.sodium}')),
-              DataCell(Text(format.format(dessert.calcium / 100))),
-              DataCell(Text(format.format(dessert.iron / 100))),
-            ],
-          );
-        }).toList());
+//     var r = AsyncRowsResponse(
+//         x.totalRecords,
+//         x.data.map((dessert) {
+//           return DataRow(
+//             key: ValueKey<int>(dessert.id),
+//             selected: dessert.selected,
+//             onSelectChanged: (value) {
+//               if (value != null) {
+//                 setRowSelection(ValueKey<int>(dessert.id), value);
+//               }
+//             },
+//             cells: [
+//               DataCell(Text(dessert.name)),
+//               DataCell(Text('${dessert.calories}')),
+//               DataCell(Text(dessert.fat.toStringAsFixed(1))),
+//               DataCell(Text('${dessert.carbs}')),
+//               DataCell(Text(dessert.protein.toStringAsFixed(1))),
+//               DataCell(Text('${dessert.sodium}')),
+//               DataCell(Text(format.format(dessert.calcium / 100))),
+//               DataCell(Text(format.format(dessert.iron / 100))),
+//             ],
+//           );
+//         }).toList());
 
-    return r;
-  }
-}
+//     return r;
+//   }
+// }
 
-class DesertsFakeWebServiceResponse {
-  DesertsFakeWebServiceResponse(this.totalRecords, this.data);
+// class DesertsFakeWebServiceResponse {
+//   DesertsFakeWebServiceResponse(this.totalRecords, this.data);
 
-  /// THe total ammount of records on the server, e.g. 100
-  final int totalRecords;
+//   /// THe total ammount of records on the server, e.g. 100
+//   final int totalRecords;
 
-  /// One page, e.g. 10 reocrds
-  final List<Dessert> data;
-}
+//   /// One page, e.g. 10 reocrds
+//   final List<Dessert> data;
+// }
 
-class DesertsFakeWebService {
-  int Function(Dessert, Dessert)? _getComparisonFunction(
-      String column, bool ascending) {
-    var coef = ascending ? 1 : -1;
-    switch (column) {
-      case 'name':
-        return (Dessert d1, Dessert d2) => coef * d1.name.compareTo(d2.name);
-      case 'calories':
-        return (Dessert d1, Dessert d2) => coef * (d1.calories - d2.calories);
-      case 'fat':
-        return (Dessert d1, Dessert d2) => coef * (d1.fat - d2.fat).round();
-      case 'carbs':
-        return (Dessert d1, Dessert d2) => coef * (d1.carbs - d2.carbs);
-      case 'protein':
-        return (Dessert d1, Dessert d2) =>
-            coef * (d1.protein - d2.protein).round();
-      case 'sodium':
-        return (Dessert d1, Dessert d2) => coef * (d1.sodium - d2.sodium);
-      case 'calcium':
-        return (Dessert d1, Dessert d2) => coef * (d1.calcium - d2.calcium);
-      case 'iron':
-        return (Dessert d1, Dessert d2) => coef * (d1.iron - d2.iron);
-    }
+// class DesertsFakeWebService {
+//   int Function(Dessert, Dessert)? _getComparisonFunction(
+//       String column, bool ascending) {
+//     var coef = ascending ? 1 : -1;
+//     switch (column) {
+//       case 'name':
+//         return (Dessert d1, Dessert d2) => coef * d1.name.compareTo(d2.name);
+//       case 'calories':
+//         return (Dessert d1, Dessert d2) => coef * (d1.calories - d2.calories);
+//       case 'fat':
+//         return (Dessert d1, Dessert d2) => coef * (d1.fat - d2.fat).round();
+//       case 'carbs':
+//         return (Dessert d1, Dessert d2) => coef * (d1.carbs - d2.carbs);
+//       case 'protein':
+//         return (Dessert d1, Dessert d2) =>
+//             coef * (d1.protein - d2.protein).round();
+//       case 'sodium':
+//         return (Dessert d1, Dessert d2) => coef * (d1.sodium - d2.sodium);
+//       case 'calcium':
+//         return (Dessert d1, Dessert d2) => coef * (d1.calcium - d2.calcium);
+//       case 'iron':
+//         return (Dessert d1, Dessert d2) => coef * (d1.iron - d2.iron);
+//     }
 
-    return null;
-  }
+//     return null;
+//   }
 
-  Future<DesertsFakeWebServiceResponse> getData(int startingAt, int count,
-      RangeValues? caloriesFilter, String sortedBy, bool sortedAsc) async {
-    return Future.delayed(
-        Duration(
-            milliseconds: startingAt == 0
-                ? 2650
-                : startingAt < 20
-                    ? 2000
-                    : 400), () {
-      var result = _dessertsX3;
+//   Future<DesertsFakeWebServiceResponse> getData(int startingAt, int count,
+//       RangeValues? caloriesFilter, String sortedBy, bool sortedAsc) async {
+//     return Future.delayed(
+//         Duration(
+//             milliseconds: startingAt == 0
+//                 ? 2650
+//                 : startingAt < 20
+//                     ? 2000
+//                     : 400), () {
+//       var result = _dessertsX3;
 
-      if (caloriesFilter != null) {
-        result = result
-            .where((e) =>
-                e.calories >= caloriesFilter.start &&
-                e.calories <= caloriesFilter.end)
-            .toList();
-      }
+//       if (caloriesFilter != null) {
+//         result = result
+//             .where((e) =>
+//                 e.calories >= caloriesFilter.start &&
+//                 e.calories <= caloriesFilter.end)
+//             .toList();
+//       }
 
-      result.sort(_getComparisonFunction(sortedBy, sortedAsc));
-      return DesertsFakeWebServiceResponse(
-          result.length, result.skip(startingAt).take(count).toList());
-    });
-  }
-}
+//       result.sort(_getComparisonFunction(sortedBy, sortedAsc));
+//       return DesertsFakeWebServiceResponse(
+//           result.length, result.skip(startingAt).take(count).toList());
+//     });
+//   }
+// }
 
 int _selectedCount = 0;
 
@@ -395,6 +404,8 @@ List<Dessert> _desserts = <Dessert>[
     87,
     14,
     1,
+    '1234.tiff',
+    r'C:\TGL-Scan-Test-2\image-archive',
   ),
   Dessert(
     'Ice Cream Sandwich',
@@ -405,6 +416,8 @@ List<Dessert> _desserts = <Dessert>[
     129,
     8,
     1,
+    '1234.tiff',
+    r'C:\TGL-Scan-Test-2\image-archive',
   ),
   Dessert(
     'Eclair',
@@ -415,6 +428,8 @@ List<Dessert> _desserts = <Dessert>[
     337,
     6,
     7,
+    '1234.tiff',
+    r'C:\TGL-Scan-Test-2\image-archive',
   ),
   Dessert(
     'Cupcake',
@@ -425,6 +440,8 @@ List<Dessert> _desserts = <Dessert>[
     413,
     3,
     8,
+    '1234.tiff',
+    r'C:\TGL-Scan-Test-2\image-archive',
   ),
   Dessert(
     'Gingerbread',
@@ -435,6 +452,8 @@ List<Dessert> _desserts = <Dessert>[
     327,
     7,
     16,
+    '1234.tiff',
+    r'C:\TGL-Scan-Test-2\image-archive',
   ),
   Dessert(
     'Jelly Bean',
@@ -445,6 +464,8 @@ List<Dessert> _desserts = <Dessert>[
     50,
     0,
     0,
+    '1234.tiff',
+    r'C:\TGL-Scan-Test-2\image-archive',
   ),
   Dessert(
     'Lollipop',
@@ -455,6 +476,8 @@ List<Dessert> _desserts = <Dessert>[
     38,
     0,
     2,
+    '1234.tiff',
+    r'C:\TGL-Scan-Test-2\image-archive',
   ),
   Dessert(
     'Honeycomb',
@@ -465,6 +488,8 @@ List<Dessert> _desserts = <Dessert>[
     562,
     0,
     45,
+    '1234.tiff',
+    r'C:\TGL-Scan-Test-2\image-archive',
   ),
   Dessert(
     'Donut',
@@ -475,6 +500,8 @@ List<Dessert> _desserts = <Dessert>[
     326,
     2,
     22,
+    '1234.tiff',
+    r'C:\TGL-Scan-Test-2\image-archive',
   ),
   Dessert(
     'Apple Pie',
@@ -485,6 +512,8 @@ List<Dessert> _desserts = <Dessert>[
     54,
     12,
     6,
+    '1234.tiff',
+    r'C:\TGL-Scan-Test-2\image-archive',
   ),
   Dessert(
     'Frozen Yougurt with sugar',
@@ -495,6 +524,8 @@ List<Dessert> _desserts = <Dessert>[
     87,
     14,
     1,
+    '1234.tiff',
+    r'C:\TGL-Scan-Test-2\image-archive',
   ),
   Dessert(
     'Ice Cream Sandich with sugar',
@@ -505,6 +536,8 @@ List<Dessert> _desserts = <Dessert>[
     129,
     8,
     1,
+    '1234.tiff',
+    r'C:\TGL-Scan-Test-2\image-archive',
   ),
   Dessert(
     'Eclair with sugar',
@@ -515,6 +548,8 @@ List<Dessert> _desserts = <Dessert>[
     337,
     6,
     7,
+    '1234.tiff',
+    r'C:\TGL-Scan-Test-2\image-archive',
   ),
   Dessert(
     'Cupcake with sugar',
@@ -525,6 +560,8 @@ List<Dessert> _desserts = <Dessert>[
     413,
     3,
     8,
+    '1234.tiff',
+    r'C:\TGL-Scan-Test-2\image-archive',
   ),
   Dessert(
     'Gingerbread with sugar',
@@ -535,6 +572,8 @@ List<Dessert> _desserts = <Dessert>[
     327,
     7,
     16,
+    '1234.tiff',
+    r'C:\TGL-Scan-Test-2\image-archive',
   ),
   Dessert(
     'Jelly Bean with sugar',
@@ -545,6 +584,8 @@ List<Dessert> _desserts = <Dessert>[
     50,
     0,
     0,
+    '1234.tiff',
+    r'C:\TGL-Scan-Test-2\image-archive',
   ),
   Dessert(
     'Lollipop with sugar',
@@ -555,6 +596,8 @@ List<Dessert> _desserts = <Dessert>[
     38,
     0,
     2,
+    '1234.tiff',
+    r'C:\TGL-Scan-Test-2\image-archive',
   ),
   Dessert(
     'Honeycomd with sugar',
@@ -565,6 +608,8 @@ List<Dessert> _desserts = <Dessert>[
     562,
     0,
     45,
+    '1234.tiff',
+    r'C:\TGL-Scan-Test-2\image-archive',
   ),
   Dessert(
     'Donut with sugar',
@@ -575,6 +620,8 @@ List<Dessert> _desserts = <Dessert>[
     326,
     2,
     22,
+    '1234.tiff',
+    r'C:\TGL-Scan-Test-2\image-archive',
   ),
   Dessert(
     'Apple pie with sugar',
@@ -585,6 +632,8 @@ List<Dessert> _desserts = <Dessert>[
     54,
     12,
     6,
+    '1234.tiff',
+    r'C:\TGL-Scan-Test-2\image-archive',
   ),
   Dessert(
     'Forzen yougurt with honey',
@@ -595,6 +644,8 @@ List<Dessert> _desserts = <Dessert>[
     87,
     14,
     1,
+    '1234.tiff',
+    r'C:\TGL-Scan-Test-2\image-archive',
   ),
   Dessert(
     'Ice Cream Sandwich with honey',
@@ -605,6 +656,8 @@ List<Dessert> _desserts = <Dessert>[
     129,
     8,
     1,
+    '1234.tiff',
+    r'C:\TGL-Scan-Test-2\image-archive',
   ),
   Dessert(
     'Eclair with honey',
@@ -615,6 +668,8 @@ List<Dessert> _desserts = <Dessert>[
     337,
     6,
     7,
+    '1234.tiff',
+    r'C:\TGL-Scan-Test-2\image-archive',
   ),
   Dessert(
     'Cupcake with honey',
@@ -625,6 +680,8 @@ List<Dessert> _desserts = <Dessert>[
     413,
     3,
     8,
+    '1234.tiff',
+    r'C:\TGL-Scan-Test-2\image-archive',
   ),
   Dessert(
     'Gignerbread with hone',
@@ -635,6 +692,8 @@ List<Dessert> _desserts = <Dessert>[
     327,
     7,
     16,
+    '1234.tiff',
+    r'C:\TGL-Scan-Test-2\image-archive',
   ),
   Dessert(
     'Jelly Bean with honey',
@@ -645,6 +704,8 @@ List<Dessert> _desserts = <Dessert>[
     50,
     0,
     0,
+    '1234.tiff',
+    r'C:\TGL-Scan-Test-2\image-archive',
   ),
   Dessert(
     'Lollipop with honey',
@@ -655,6 +716,8 @@ List<Dessert> _desserts = <Dessert>[
     38,
     0,
     2,
+    '1234.tiff',
+    r'C:\TGL-Scan-Test-2\image-archive',
   ),
   Dessert(
     'Honeycomd with honey',
@@ -665,6 +728,8 @@ List<Dessert> _desserts = <Dessert>[
     562,
     0,
     45,
+    '1234.tiff',
+    r'C:\TGL-Scan-Test-2\image-archive',
   ),
   Dessert(
     'Donut with honey',
@@ -675,6 +740,8 @@ List<Dessert> _desserts = <Dessert>[
     326,
     2,
     22,
+    '1234.tiff',
+    r'C:\TGL-Scan-Test-2\image-archive',
   ),
   Dessert(
     'Apple pie with honey',
@@ -685,14 +752,34 @@ List<Dessert> _desserts = <Dessert>[
     54,
     12,
     6,
+    '1234.tiff',
+    r'C:\TGL-Scan-Test-2\image-archive',
   ),
 ];
 
 List<Dessert> _dessertsX3 = _desserts.toList()
-  ..addAll(_desserts.map((i) => Dessert('${i.name} x2', i.calories, i.fat,
-      i.carbs, i.protein, i.sodium, i.calcium, i.iron)))
-  ..addAll(_desserts.map((i) => Dessert('${i.name} x3', i.calories, i.fat,
-      i.carbs, i.protein, i.sodium, i.calcium, i.iron)));
+  ..addAll(_desserts.map((i) => Dessert(
+      '${i.name} x2',
+      i.calories,
+      i.fat,
+      i.carbs,
+      i.protein,
+      i.sodium,
+      i.calcium,
+      i.iron,
+      i.fileName,
+      i.imageSaveDir)))
+  ..addAll(_desserts.map((i) => Dessert(
+      '${i.name} x3',
+      i.calories,
+      i.fat,
+      i.carbs,
+      i.protein,
+      i.sodium,
+      i.calcium,
+      i.iron,
+      i.fileName,
+      i.imageSaveDir)));
 
 _showSnackbar(BuildContext context, String text, [Color? color]) {
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(

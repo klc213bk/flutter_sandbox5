@@ -72,7 +72,6 @@ AppBar appbar(BuildContext context) {
   return AppBar(
     leading: appIconButon,
     title: title,
-    flexibleSpace: FlexibleSpaceBar(),
     actions: [
       uploadButon,
       loginStatus,

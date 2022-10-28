@@ -5,10 +5,14 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:window_size/window_size.dart';
 
+import 'home_bindings.dart';
 import 'pages/home.dart';
 import 'themes/themes.dart';
+import 'init.dart';
+import 'splash_screen.dart';
 
 main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,21 +26,33 @@ main() {
     //  });
   }
 
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final Future _initFuture = Init.initialize();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: true,
       title: 'New Scan2',
       //  themeMode: ThemeMode.light,
       theme: ThemeClass.lightTheme,
       // darkTheme: ThemeClass.darkTheme,
-      home: HomePage(),
+      initialBinding: HomeBindings(),
+      home: FutureBuilder(
+        future: _initFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return HomePage();
+          } else {
+            return SplashScreen();
+          }
+        },
+      ),
     );
   }
 }

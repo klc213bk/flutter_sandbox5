@@ -64,6 +64,8 @@ class FilingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var textStyle = Theme.of(context).primaryTextTheme.bodyText2!;
+
     final double mediaQueryWidth = 0.61 * MediaQuery.of(context).size.width;
 
     // ignore: avoid_print
@@ -80,20 +82,21 @@ class FilingView extends StatelessWidget {
     return Column(
       children: [
         divider(context, '索引設置'),
-        filing_line1(context, mediaQueryWidth),
-        filing_line2(context, mediaQueryWidth),
-        filing_line3(context, mediaQueryWidth),
-        filing_line4(context, mediaQueryWidth),
-        filing_line5(context, mediaQueryWidth),
-        filing_line6(context, mediaQueryWidth),
-        filing_line7(context, mediaQueryWidth),
-        filing_line8(context, mediaQueryWidth),
-        filing_line9(context, mediaQueryWidth),
+        filing_line1(context, mediaQueryWidth, textStyle),
+        filing_line2(context, mediaQueryWidth, textStyle),
+        filing_line3(context, mediaQueryWidth, textStyle),
+        filing_line4(context, mediaQueryWidth, textStyle),
+        filing_line5(context, mediaQueryWidth, textStyle),
+        filing_line6(context, mediaQueryWidth, textStyle),
+        filing_line7(context, mediaQueryWidth, textStyle),
+        filing_line8(context, mediaQueryWidth, textStyle),
+        filing_line9(context, mediaQueryWidth, textStyle),
       ],
     );
   }
 
-  Widget filing_line1(BuildContext context, double mediaQueryWidth) {
+  Widget filing_line1(
+      BuildContext context, double mediaQueryWidth, TextStyle style) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -104,6 +107,7 @@ class FilingView extends StatelessWidget {
           child: Text(
             '組織編碼',
             softWrap: false,
+            style: style,
           ),
         ),
         Expanded(
@@ -123,6 +127,7 @@ class FilingView extends StatelessWidget {
             "部室名稱",
             softWrap: false,
             textAlign: TextAlign.right,
+            style: style,
           ),
         ),
         Expanded(
@@ -140,7 +145,8 @@ class FilingView extends StatelessWidget {
     );
   }
 
-  Widget filing_line2(BuildContext context, double mediaQueryWidth) {
+  Widget filing_line2(
+      BuildContext context, double mediaQueryWidth, TextStyle style) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -151,6 +157,7 @@ class FilingView extends StatelessWidget {
             "影像主類型",
             softWrap: false,
             textAlign: TextAlign.left,
+            style: style,
           ),
         ),
         Container(
@@ -163,6 +170,7 @@ class FilingView extends StatelessWidget {
             "影像子類型",
             softWrap: false,
             textAlign: TextAlign.right,
+            style: style,
           ),
         ),
         Expanded(
@@ -176,7 +184,8 @@ class FilingView extends StatelessWidget {
     );
   }
 
-  Widget filing_line3(BuildContext context, double mediaQueryWidth) {
+  Widget filing_line3(
+      BuildContext context, double mediaQueryWidth, TextStyle style) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -186,6 +195,7 @@ class FilingView extends StatelessWidget {
           child: new Text(
             "文件編號",
             textAlign: TextAlign.left,
+            style: style,
           ),
         ),
         Container(
@@ -202,6 +212,7 @@ class FilingView extends StatelessWidget {
             "頁碼",
             softWrap: false,
             textAlign: TextAlign.right,
+            style: style,
           ),
         ),
         Expanded(
@@ -220,7 +231,8 @@ class FilingView extends StatelessWidget {
     );
   }
 
-  Widget filing_line4(BuildContext context, double mediaQueryWidth) {
+  Widget filing_line4(
+      BuildContext context, double mediaQueryWidth, TextStyle style) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -231,6 +243,7 @@ class FilingView extends StatelessWidget {
             "箱號",
             softWrap: false,
             textAlign: TextAlign.left,
+            style: style,
           ),
         ),
         Container(
@@ -253,7 +266,8 @@ class FilingView extends StatelessWidget {
     );
   }
 
-  Widget filing_line5(BuildContext context, double mediaQueryWidth) {
+  Widget filing_line5(
+      BuildContext context, double mediaQueryWidth, TextStyle style) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -263,6 +277,7 @@ class FilingView extends StatelessWidget {
           child: new Text(
             "批次號碼\n部門別",
             textAlign: TextAlign.left,
+            style: style,
           ),
         ),
         Container(
@@ -275,6 +290,7 @@ class FilingView extends StatelessWidget {
             "日期",
             softWrap: false,
             textAlign: TextAlign.right,
+            style: style,
           ),
         ),
         Container(
@@ -291,6 +307,7 @@ class FilingView extends StatelessWidget {
             "分區",
             softWrap: false,
             textAlign: TextAlign.right,
+            style: style,
           ),
         ),
         Expanded(
@@ -314,6 +331,7 @@ class FilingView extends StatelessWidget {
               "文件別",
               softWrap: false,
               textAlign: TextAlign.right,
+              style: style,
             ),
           ),
         ),
@@ -333,7 +351,8 @@ class FilingView extends StatelessWidget {
     );
   }
 
-  Widget filing_line6(BuildContext context, double mediaQueryWidth) {
+  Widget filing_line6(
+      BuildContext context, double mediaQueryWidth, TextStyle style) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -344,6 +363,7 @@ class FilingView extends StatelessWidget {
             "公司碼\n(團險保單號碼)",
             softWrap: false,
             textAlign: TextAlign.left,
+            style: style,
           ),
         ),
         Container(
@@ -362,6 +382,7 @@ class FilingView extends StatelessWidget {
             "個人碼",
             softWrap: false,
             textAlign: TextAlign.right,
+            style: style,
           ),
         ),
         Expanded(
@@ -380,7 +401,8 @@ class FilingView extends StatelessWidget {
     );
   }
 
-  Widget filing_line7(BuildContext context, double mediaQueryWidth) {
+  Widget filing_line7(
+      BuildContext context, double mediaQueryWidth, TextStyle style) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -391,6 +413,7 @@ class FilingView extends StatelessWidget {
             "替換",
             softWrap: false,
             textAlign: TextAlign.left,
+            style: style,
           ),
         ),
         Container(
@@ -404,6 +427,7 @@ class FilingView extends StatelessWidget {
             "插入",
             softWrap: false,
             textAlign: TextAlign.right,
+            style: style,
           ),
         ),
         Container(
@@ -417,6 +441,7 @@ class FilingView extends StatelessWidget {
             "是否發EMAIL\n(補送掃件應選否)",
             softWrap: false,
             textAlign: TextAlign.right,
+            style: style,
           ),
         ),
         Container(
@@ -432,6 +457,7 @@ class FilingView extends StatelessWidget {
               "視訊投保件",
               softWrap: false,
               textAlign: TextAlign.right,
+              style: style,
             ),
           ),
         ),
@@ -446,7 +472,8 @@ class FilingView extends StatelessWidget {
     );
   }
 
-  Widget filing_line8(BuildContext context, double mediaQueryWidth) {
+  Widget filing_line8(
+      BuildContext context, double mediaQueryWidth, TextStyle style) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -456,6 +483,7 @@ class FilingView extends StatelessWidget {
           child: new Text(
             "影像備註",
             textAlign: TextAlign.left,
+            style: style,
           ),
         ),
         Expanded(
@@ -474,7 +502,8 @@ class FilingView extends StatelessWidget {
     );
   }
 
-  Widget filing_line9(BuildContext context, double mediaQueryWidth) {
+  Widget filing_line9(
+      BuildContext context, double mediaQueryWidth, TextStyle style) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -482,7 +511,7 @@ class FilingView extends StatelessWidget {
         deleteBtn(context),
         batchDeleteBtn(context),
         copyBtn(context),
-        importBtn(context),
+        ImportBtn(),
       ],
     );
   }

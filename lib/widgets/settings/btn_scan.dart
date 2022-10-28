@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../../controller/new_scan_2_controller.dart';
 
-class Button_Scan extends StatefulWidget {
+class Button_Scan extends GetView<NewScan2Controller> {
   const Button_Scan({super.key});
 
-  @override
-  State<Button_Scan> createState() => _ButtonState_Scan();
-}
-
-class _ButtonState_Scan extends State<Button_Scan> {
   @override
   Widget build(BuildContext context) {
     final ButtonStyle style = ElevatedButton.styleFrom(
@@ -22,6 +19,9 @@ class _ButtonState_Scan extends State<Button_Scan> {
       padding: EdgeInsets.only(right: 10),
       child: ElevatedButton(
         style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color?>(
+              Color.fromARGB(255, 39, 50, 123),
+            ),
             textStyle: MaterialStateProperty.all<TextStyle>(
               TextStyle(fontWeight: FontWeight.normal),
             ),
@@ -29,7 +29,9 @@ class _ButtonState_Scan extends State<Button_Scan> {
                 RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0),
             ))),
-        onPressed: () {},
+        onPressed: () {
+          controller.startScan();
+        },
         child: Text(
           '開始掃描',
           softWrap: false,

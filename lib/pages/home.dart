@@ -1,7 +1,5 @@
-import 'package:cross_scroll/cross_scroll.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_split_view/multi_split_view.dart';
-import 'package:photo_view/photo_view.dart';
 
 import 'app_bar.dart';
 import 'preview_img_view.dart';

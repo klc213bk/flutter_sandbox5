@@ -49,7 +49,11 @@ dependencies:
   window_manager: ^0.2.7
   data_table_2: ^2.3.7
   intl: ^0.17.0
-
+  get:
+  xml: ^6.1.0
+  path_provider: ^2.0.11
+  uuid: ^3.0.6
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -1,14 +1,7 @@
-import 'dart:math';
-
-import 'package:cross_scroll/cross_scroll.dart';
 import 'package:flutter/material.dart';
-
-import '../widgets/divider.dart';
-import '../widgets/settings/dd_paper_side.dart';
-import 'async_paginated_data_table2.dart';
-import 'data_table2_scrollup.dart';
 import 'settings_view.dart';
 import 'filing_view.dart';
+import 'data_table2_scrollup.dart';
 
 /// {@template scan_view}
 /// A [StatelessWidget] which reacts to the provided

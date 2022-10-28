@@ -7,6 +7,9 @@ Widget batchDeleteBtn(BuildContext context) {
     margin: EdgeInsets.fromLTRB(3, 10, 3, 0),
     child: ElevatedButton(
       style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color?>(
+            Color.fromARGB(255, 39, 50, 123),
+          ),
           textStyle: MaterialStateProperty.all<TextStyle>(
             TextStyle(fontWeight: FontWeight.normal),
           ),
